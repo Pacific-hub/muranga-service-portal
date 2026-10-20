@@ -1,0 +1,4 @@
+node_modules/
+muranga_portal.db
+uploads/*
+!uploads/.gitkeep

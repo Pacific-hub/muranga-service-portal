@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In | Murang'a County Service Portal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>body { font-family: 'Inter', sans-serif; }</style>
+</head>
+<body class="bg-slate-50 min-h-screen flex flex-col">
+
+  <!-- Simple Header with Official -->
+  <header class="bg-white border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3">
+        <img
+          src="/images/logo.png"
+          alt="Murang'a County Logo"
+          class="w-10 h-10 object-contain"
+          onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');"
+        />
+        <div class="hidden w-10 h-10 rounded-full bg-emerald-900 border-2 border-amber-400 flex items-center justify-center text-white shadow-sm">
+          <svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3l8 4.5v6c0 5-3.5 9.2-8 10.5-4.5-1.3-8-5.5-8-10.5v-6L12 3z" />
+          </svg>
+        </div>
+        <div>
+          <span class="font-bold text-slate-900 text-sm block leading-none">MURANG'A COUNTY GOVERNMENT</span>
+          <span class="text-xs text-emerald-700 font-medium">Public Service Portal</span>
+        </div>
+      </a>
+      <a href="/" class="text-xs font-medium text-slate-600 hover:text-emerald-800">&larr; Back to Home</a>
+    </div>
+  </header>
+
+  <main class="flex-1 flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-md rounded-xl shadow-sm border border-slate-200 p-6 sm:p-8">
+
+      <!-- Role Selector Tabs (Citizen vs Admin) -->
+      <div class="grid grid-cols-2 gap-2 bg-slate-100 p-1 rounded-lg mb-6">
+        <button id="tabCitizen" type="button" class="py-2 text-xs font-semibold rounded-md bg-white text-slate-900 shadow-sm">
+          Citizen Portal
+        </button>
+        <button id="tabAdmin" type="button" class="py-2 text-xs font-semibold rounded-md text-slate-600 hover:text-slate-900">
+          County Staff Admin
+        </button>
+      </div>
+
+      <h1 id="authHeading" class="text-xl font-bold text-slate-900 mb-1">Citizen Sign In</h1>
+      <p id="authSubtext" class="text-xs text-slate-500 mb-6">Sign in to submit and track your service requests.</p>
+
+      <!-- Error Alert Box -->
+      <div id="authError" class="hidden mb-4 p-3 rounded-lg bg-red-50 border border-red-200 text-xs text-red-700"></div>
+
+      <!-- Login Form -->
+      <form id="loginForm" class="space-y-4">
+        <div>
+          <label class="block text-xs font-medium text-slate-700 mb-1">Email Address</label>
+          <input id="loginEmail" type="email" required placeholder="name@example.com"
+            class="w-full rounded-lg border border-slate-300 px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-700" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-slate-700 mb-1">Password</label>
+          <input id="loginPassword" type="password" required placeholder="••••••••"
+            class="w-full rounded-lg border border-slate-300 px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-700" />
+        </div>
+        <button type="submit" id="loginSubmitBtn"
+          class="w-full bg-emerald-800 hover:bg-emerald-900 text-white font-semibold py-2.5 rounded-lg text-sm transition">
+          Sign In
+        </button>
+      </form>
+
+      <!-- Registration Form (Citizens Only) -->
+      <form id="registerForm" class="hidden space-y-3.5">
+        <div>
+          <label class="block text-xs font-medium text-slate-700 mb-1">Full Name</label>
+          <input id="regName" type="text" required placeholder="e.g. Mary Wambui"
+            class="w-full rounded-lg border border-slate-300 px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-700" />
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-medium text-slate-700 mb-1">National ID No.</label>
+            <input id="regId" type="text" required placeholder="e.g. 34567890"
+              class="w-full rounded-lg border border-slate-300 px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-700" />
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-700 mb-1">Phone Number</label>
+            <input id="regPhone" type="tel" required placeholder="0712345678"
+              class="w-full rounded-lg border border-slate-300 px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-700" />
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-slate-700 mb-1">Email Address</label>
+          <input id="regEmail" type="email" required placeholder="mary@example.com"
+            class="w-full rounded-lg border border-slate-300 px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-700" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-slate-700 mb-1">Create Password</label>
+          <input id="regPassword" type="password" required placeholder="Minimum 6 characters"
+            class="w-full rounded-lg border border-slate-300 px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-700" />
+        </div>
+        <button type="submit"
+          class="w-full bg-emerald-800 hover:bg-emerald-900 text-white font-semibold py-2.5 rounded-lg text-sm transition">
+          Create Citizen Account
+        </button>
+      </form>
+
+      <!-- Switch between Login & Register for Citizens -->
+      <div id="citizenToggleBox" class="mt-5 pt-4 border-t border-slate-100 text-center">
+        <button id="toggleRegisterBtn" type="button" class="text-xs font-medium text-emerald-800 hover:underline">
+          New resident? Create a Citizen Account
+        </button>
+      </div>
+
+      <!-- Demo Credentials Helper -->
+      <div class="mt-5 p-3 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-600">
+        <p class="font-semibold text-slate-700 mb-1">Pre-loaded Database Accounts:</p>
+        <p id="demoCredText">Citizen: <strong>kamau@gmail.com</strong> / <strong>citizen123</strong></p>
+      </div>
+    </div>
+  </main>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>
